@@ -1,0 +1,104 @@
+# Sample data
+data <- data.frame(
+  ID = c(1, 2, 3, 4, 5),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Education = c("Graduate", "Undergrad", "High School", "Graduate", "Undergrad"),
+  Occupation = c("Engineer", "Teacher", "Doctor", "Lawyer", "Artist")
+)
+
+# Load necessary library
+library(ggplot2)
+
+# Create a bar plot showing the count of each Gender
+ggplot(data, aes(x = Gender)) +
+  geom_bar(fill = "blue", alpha = 0.7) +
+  labs(title = "Count of Each Gender",
+       x = "Gender",
+       y = "Count") +
+  theme_minimal()
+# Sample data
+data <- data.frame(
+  ID = c(1, 2, 3, 4, 5),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Education = c("Graduate", "Undergrad", "High School", "Graduate", "Undergrad"),
+  Occupation = c("Engineer", "Teacher", "Doctor", "Lawyer", "Artist")
+)
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Create a data frame with the count of each Education level
+education_distribution <- data %>%
+  count(Education)
+
+# Create the pie chart
+ggplot(education_distribution, aes(x = "", y = n, fill = Education)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Distribution of Education Levels") +
+  theme_void() +
+  theme(legend.position = "right")
+# Sample data
+data <- data.frame(
+  ID = c(1, 2, 3, 4, 5),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Education = c("Graduate", "Undergrad", "High School", "Graduate", "Undergrad"),
+  Occupation = c("Engineer", "Teacher", "Doctor", "Lawyer", "Artist")
+)
+
+# Load necessary library
+library(ggplot2)
+
+# Create a stacked bar plot showing the count of each Occupation by Gender
+ggplot(data, aes(x = Occupation, fill = Gender)) +
+  geom_bar(position = "stack") +
+  labs(title = "Count of Each Occupation by Gender",
+       x = "Occupation",
+       y = "Count") +
+  theme_minimal()
+# Sample data
+data <- data.frame(
+  ID = c(1, 2, 3, 4, 5),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Education = c("Graduate", "Undergrad", "High School", "Graduate", "Undergrad"),
+  Occupation = c("Engineer", "Teacher", "Doctor", "Lawyer", "Artist")
+)
+
+# Load necessary libraries
+library(ggplot2)
+library(ggmosaic)
+
+# Create a mosaic plot of Education vs. Occupation
+ggplot(data) + 
+  geom_mosaic(aes(weight = 1, x = product(Education), fill = Occupation)) +
+  labs(title = "Mosaic Plot of Education vs. Occupation",
+       x = "Education",
+       y = "Proportion",
+       fill = "Occupation") +
+  theme_minimal()
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Create the data frame
+data <- data.frame(
+  ID = c(1, 2, 3, 4, 5),
+  Gender = c("Male", "Female", "Male", "Female", "Male"),
+  Education = c("Graduate", "Undergrad", "High School", "Graduate", "Undergrad"),
+  Occupation = c("Engineer", "Teacher", "Doctor", "Lawyer", "Artist")
+)
+
+# Calculate counts of Gender across Education levels
+gender_counts <- data %>% 
+  group_by(Education, Gender) %>% 
+  summarise(count = n())
+
+# Plotting using ggplot2
+ggplot(gender_counts, aes(x = Education, y = count, fill = Gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Counts of Gender Across Education Levels",
+       x = "Education Level",
+       y = "Count",
+       fill = "Gender") +
+  theme_minimal()
